@@ -37,7 +37,7 @@ spec:
     spec:
       containers:
       - name: calculadora
-        image: crisdockerz/calculadora-api:1  # 🔄 Altere para seu Docker Hub
+        image: crisdockerz/calculadora-api:2  # 🔄 Altere para seu Docker Hub
         ports:
         - containerPort: 8000
 
