@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/crisz-source/gitops-ngixn'
     targetRevision: HEAD
-    path: apps/overlay
+    path: apps
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
