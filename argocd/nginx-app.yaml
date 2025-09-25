@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/SEU_USUARIO/gitops-nginx'
+    repoURL: 'https://github.com/crisz-source/gitops-ngixn'
     targetRevision: HEAD
     path: apps
   destination:
