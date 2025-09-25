@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculadora FastAPI</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h1>Calculadora FastAPI</h1>
+    <input type="number" id="a" placeholder="Número A">
+    <input type="number" id="b" placeholder="Número B">
+    <br><br>
+    <button onclick="calcular('soma')">Somar</button>
+    <button onclick="calcular('subtracao')">Subtrair</button>
+    <p id="resultado"></p>
+
+    <script>
+        async function calcular(operacao) {
+            const a = parseFloat(document.getElementById('a').value);
+            const b = parseFloat(document.getElementById('b').value);
+
+            const resposta = await fetch(`/${operacao}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ a, b })
+            });
+
+            const dados = await resposta.json();
+            document.getElementById('resultado').innerText = `Resultado: ${dados.resultado}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,20 +1,43 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: nginx
+#   namespace: default
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: nginx
+#   template:
+#     metadata:
+#       labels:
+#         app: nginx
+#     spec:
+#       containers:
+#       - name: nginx
+#         image: nginx:1.23
+#         ports:
+#         - containerPort: 80
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
-  namespace: default
+  name: calculadora
+  labels:
+    app: calculadora
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: calculadora
   template:
     metadata:
       labels:
-        app: nginx
+        app: calculadora
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.23
+      - name: calculadora
+        image: crisdockerz/calculadora-api:1  # 🔄 Altere para seu Docker Hub
         ports:
-        - containerPort: 80
+        - containerPort: 8000
+
