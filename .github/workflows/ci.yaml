@@ -69,7 +69,7 @@ jobs:
       #     TIMESTAMP=$(date +%s)
       #     echo "new_tag=1.${TIMESTAMP}" >> $GITHUB_OUTPUT
 
-      - name: Definir próxima tag incremental
+      - name: Definir próxima tag incremental da imagem
         id: version
         run: |
           git fetch --tags
