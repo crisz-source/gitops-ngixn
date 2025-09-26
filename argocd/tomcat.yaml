@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/crisz-source/manifestos'
     targetRevision: HEAD
-    path: tomcat
+    path: manifests/tomcat
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
