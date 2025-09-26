@@ -6,9 +6,9 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/crisz-source/gitops-ngixn'
+    repoURL: 'https://github.com/crisz-source/manifestos'
     targetRevision: HEAD
-    path: apps/tomcat
+    path: tomcat
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default

@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: nginx-app
+  name: calculadora
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/crisz-source/gitops-ngixn'
+    repoURL: 'https://github.com/crisz-source/manifestos'
     targetRevision: HEAD
-    path: apps
+    path: calculadora
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: default
