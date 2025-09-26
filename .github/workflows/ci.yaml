@@ -18,7 +18,7 @@ jobs:
       APP_NAME: tomcat
       APP_PATH: manifests/tomcat/tomcat.yaml
     steps:
-      - name: Clonar repositório de manifests
+      - name: Clonar repositório de manifests 
         uses: actions/checkout@v3
         with:
           repository: ${{ env.MANIFEST_REPO }}
