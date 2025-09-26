@@ -59,7 +59,7 @@ jobs:
     env:
       APP_NAME: calculadora
       IMAGE_NAME: calculadora-custom
-      APP_PATH: manifests/calculadora/calculadora.yaml
+      APP_PATH: manifests/calculadora/nginx-deployment.yaml
     steps:
       - name: Checkout código fonte
         uses: actions/checkout@v3
