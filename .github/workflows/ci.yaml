@@ -175,7 +175,7 @@ jobs:
           git push
 
   deploy:
-      needs: [update-tomcat, build-calculadora] # <-- Só roda depois dos dois
+      needs: [build-hello-world, build-calculadora] # <-- Só roda depois dos dois
       runs-on: ubuntu-latest
       steps:
         - name: Clonar repositório de manifests
