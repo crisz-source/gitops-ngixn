@@ -18,11 +18,18 @@ jobs:
       APP_NAME: tomcat
       APP_PATH: manifests/tomcat/tomcat.yaml
     steps:
+      - name: Clonar repositório de manifests
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ env.MANIFEST_REPO }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: manifests
+
       - name: Definir próxima versão do Tomcat
         id: version
         run: |
-          # Pegando a versão atual do Tomcat no manifest e incrementando
-          CURRENT=$(grep "image:" manifests/$APP_PATH | sed 's/.*tomcat://')
+          cd manifests
+          CURRENT=$(grep "image:" $APP_PATH | sed 's/.*tomcat://')
           if [[ -z "$CURRENT" ]]; then
             NEW_TAG="9.0"
           else
@@ -31,13 +38,6 @@ jobs:
             NEW_TAG="$MAJOR.$((MINOR+1))"
           fi
           echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
-
-      - name: Clonar repositório de manifests
-        uses: actions/checkout@v3
-        with:
-          repository: ${{ env.MANIFEST_REPO }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: manifests
 
       - name: Atualizar tag no manifesto do Tomcat
         run: |
