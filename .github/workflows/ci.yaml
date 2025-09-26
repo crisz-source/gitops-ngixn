@@ -99,3 +99,21 @@ jobs:
           git add $APP_PATH
           git commit -m "chore(calculadora): update image tag to ${{ steps.version.outputs.new_tag }}"
           git push
+
+  deploy:
+      needs: [update-tomcat, build-calculadora] # <-- Só roda depois dos dois
+      runs-on: ubuntu-latest
+      steps:
+        - name: Clonar repositório de manifests
+          uses: actions/checkout@v3
+          with:
+            repository: ${{ env.MANIFEST_REPO }}
+            token: ${{ secrets.MANIFEST_REPO_TOKEN }}
+            path: manifests
+
+        - name: Confirmar mudanças no repositório de manifests
+          run: |
+            cd manifests
+            echo "### Alterações aplicadas no repositório de manifests ###"
+            git log -2 --oneline
+            git status
