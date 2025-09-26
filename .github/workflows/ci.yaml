@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env: 
       APP_NAME: tomcat
-      APP_PATH: tomcat/tomcat.yaml
+      APP_PATH: manifests/tomcat/tomcat.yaml
     steps:
       - name: Definir próxima versão do Tomcat
         id: version
