@@ -57,6 +57,17 @@ jobs:
         run: |
           cd manifests
           sed -i "s|image:.*|image: $DOCKERHUB_USERNAME/$IMAGE_NAME:${{ steps.version.outputs.new_tag }}|" $APP_PATH
+      
+      - name: Testar se o container sobe corretamente
+        run: |
+          docker run -d --name test-${{ env.APP_NAME }} -p 3000:3000 $DOCKERHUB_USERNAME/$IMAGE_NAME:${{ steps.version.outputs.new_tag }}
+          sleep 5
+          if ! docker ps | grep test-${{ env.APP_NAME }}; then
+            echo "❌ Falha: container não subiu!"
+            exit 1
+          fi
+          echo "✅ Container iniciou com sucesso!"
+          docker rm -f test-${{ env.APP_NAME }}
 
       - name: Commit e push
         run: |
@@ -121,6 +132,17 @@ jobs:
         run: |
           cd manifests
           sed -i "s|image:.*|image: $DOCKERHUB_USERNAME/$IMAGE_NAME:${{ steps.version.outputs.new_tag }}|" $APP_PATH
+
+      - name: Testar se container da calculadora sobe corretamente
+        run: |
+          docker run -d --name test-${{ env.APP_NAME }} -p 8080:8080 $DOCKERHUB_USERNAME/$IMAGE_NAME:${{ steps.version.outputs.new_tag }}
+          sleep 5
+          if ! docker ps | grep test-${{ env.APP_NAME }}; then
+            echo "❌ Falha: container da calculadora não subiu!"
+            exit 1
+          fi
+          echo "✅ Container da calculadora iniciou com sucesso!"
+          docker rm -f test-${{ env.APP_NAME }}
 
       - name: Commit e push
         run: |
