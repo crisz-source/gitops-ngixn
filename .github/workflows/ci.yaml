@@ -159,11 +159,17 @@ jobs:
           repository: ${{ env.MANIFEST_REPO }}
           token: ${{ secrets.MANIFEST_REPO_TOKEN }}
           path: manifests
-
+      
       - name: Atualizar tag no manifesto
         run: |
           cd manifests
-          sed -i "s|image:.*|image: $DOCKERHUB_USERNAME/$IMAGE_NAME:${{ steps.version.outputs.new_tag }}|" $APP_PATH
+          sed -i "s|image:.*$APP_NAME.*|image: $DOCKERHUB_USERNAME/$IMAGE_NAME:${{ steps.version.outputs.new_tag }}|" $APP_PATH
+
+
+      #- name: Atualizar tag no manifesto
+      #  run: |
+      #    cd manifests
+      #    sed -i "s|image:.*|image: $DOCKERHUB_USERNAME/$IMAGE_NAME:${{ steps.version.outputs.new_tag }}|" $APP_PATH
 
       - name: Commit e push
         run: |
