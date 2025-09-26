@@ -20,7 +20,7 @@ jobs:
       APP_PATH: tomcat/tomcat.yaml
     steps:
       - name: Checkout código fonte
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 
 
       - name: Definir próxima tag de versão
         id: version
