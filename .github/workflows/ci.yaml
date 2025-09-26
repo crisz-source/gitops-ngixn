@@ -14,7 +14,7 @@ env:
 jobs:
   build-tomcat:
     runs-on: ubuntu-latest
-    env:
+    env: 
       APP_NAME: tomcat
       IMAGE_NAME: tomcat-custom
       APP_PATH: tomcat/tomcat.yaml
