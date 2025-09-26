@@ -72,16 +72,16 @@ jobs:
       - name: Definir próxima tag incremental da imagem
         id: version
         run: |
-          git fetch --tags
-          LAST_TAG=$(git tag --list "${APP_NAME}-*" | sort -V | tail -n 1 | sed "s/${APP_NAME}-//")
-          if [[ -z "$LAST_TAG" ]]; then
+          cd manifests
+          CURRENT=$(grep "image:" $APP_PATH | sed 's/.*://')
+          if [[ -z "$CURRENT" ]]; then
             NEW_TAG="1.0"
           else
-            MAJOR=$(echo $LAST_TAG | cut -d. -f1)
-            MINOR=$(echo $LAST_TAG | cut -d. -f2)
+            MAJOR=$(echo $CURRENT | cut -d. -f1)
+            MINOR=$(echo $CURRENT | cut -d. -f2)
             NEW_TAG="$MAJOR.$((MINOR+1))"
           fi
-          echo "new_tag=${APP_NAME}-${NEW_TAG}" >> $GITHUB_OUTPUT
+          echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
 
       - name: Login no DockerHub
         run: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
@@ -129,20 +129,20 @@ jobs:
       #   run: |
       #     TIMESTAMP=$(date +%s)
       #     echo "new_tag=1.${TIMESTAMP}" >> $GITHUB_OUTPUT
-
       - name: Definir próxima tag incremental da imagem
         id: version
         run: |
-          git fetch --tags
-          LAST_TAG=$(git tag --list "${APP_NAME}-*" | sort -V | tail -n 1 | sed "s/${APP_NAME}-//")
-          if [[ -z "$LAST_TAG" ]]; then
+          cd manifests
+          CURRENT=$(grep "image:" $APP_PATH | sed 's/.*://')
+          if [[ -z "$CURRENT" ]]; then
             NEW_TAG="1.0"
           else
-            MAJOR=$(echo $LAST_TAG | cut -d. -f1)
-            MINOR=$(echo $LAST_TAG | cut -d. -f2)
+            MAJOR=$(echo $CURRENT | cut -d. -f1)
+            MINOR=$(echo $CURRENT | cut -d. -f2)
             NEW_TAG="$MAJOR.$((MINOR+1))"
           fi
-          echo "new_tag=${APP_NAME}-${NEW_TAG}" >> $GITHUB_OUTPUT
+          echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
+
 
       - name: Login no DockerHub
         run: echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
