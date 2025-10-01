@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APP_NAME: hello-world
-      IMAGE_NAME: hello-world-custom
+      IMAGE_NAME: hello-world-custom 
       APP_PATH: manifests/hello-world/hello-world.yaml
     steps:
       - name: Checkout código fonte
